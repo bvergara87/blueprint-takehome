@@ -1,0 +1,72 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Answer {
+  id          String  @id @default(cuid())
+  value       Int
+  question_id String
+  patient     Patient @relation(fields: [patientId], references: [id])
+  patientId   String
+}
+
+model DomainMapping {
+  id          String @id @default(cuid())
+  question_id String
+  domain      String
+}
+
+model Patient {
+  id      String   @id @default(cuid())
+  answers Answer[]
+}
+
+model DiagnosticScreener {
+  id              String                      @id @default(cuid())
+  name            String
+  disorder        String
+  fullName        String
+  sections        DiagnosticScreenerSection[]
+  ScreenerContent ScreenerContent?
+}
+
+model DiagnosticScreenerSection {
+  id            String                 @id @default(cuid())
+  type          String
+  title         String
+  screener      DiagnosticScreener     @relation(fields: [screenerId], references: [id])
+  screenerId    String
+  answerOptions ScreenerAnswerOption[]
+  questions     ScreenerQuestion[]
+}
+
+model ScreenerAnswerOption {
+  id        String                    @id @default(cuid())
+  title     String
+  value     Int
+  section   DiagnosticScreenerSection @relation(fields: [sectionId], references: [id])
+  sectionId String
+}
+
+model ScreenerQuestion {
+  id         String                    @id @default(cuid())
+  questionId String                    @unique
+  title      String
+  section    DiagnosticScreenerSection @relation(fields: [sectionId], references: [id])
+  sectionId  String
+}
+
+model ScreenerContent {
+  id          String             @id @default(cuid())
+  displayName String
+  screener    DiagnosticScreener @relation(fields: [screenerId], references: [id])
+  screenerId  String             @unique
+}
