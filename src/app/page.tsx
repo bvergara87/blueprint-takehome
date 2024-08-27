@@ -8,118 +8,68 @@ import {
   Text,
   VStack,
   Button,
-  Progress,
+  Fade,
 } from "@chakra-ui/react";
-
-const screenerData = {
-  id: "abcd-123",
-  name: "BPDS",
-  disorder: "Cross-Cutting",
-  content: {
-    sections: [
-      {
-        type: "standard",
-        title:
-          "During the past TWO (2) WEEKS, how much (or how often) have you been bothered by the following problems?",
-        answers: [
-          { title: "Not at all", value: 0 },
-          { title: "Rare, less than a day or two", value: 1 },
-          { title: "Several days", value: 2 },
-          { title: "More than half the days", value: 3 },
-          { title: "Nearly every day", value: 4 },
-        ],
-        questions: [
-          {
-            question_id: "question_a",
-            title: "Little interest or pleasure in doing things?",
-          },
-          {
-            question_id: "question_b",
-            title: "Feeling down, depressed, or hopeless?",
-          },
-          {
-            question_id: "question_c",
-            title: "Sleeping less than usual, but still have a lot of energy?",
-          },
-          {
-            question_id: "question_d",
-            title:
-              "Starting lots more projects than usual or doing more risky things than usual?",
-          },
-          {
-            question_id: "question_e",
-            title: "Feeling nervous, anxious, frightened, worried, or on edge?",
-          },
-          {
-            question_id: "question_f",
-            title: "Feeling panic or being frightened?",
-          },
-          {
-            question_id: "question_g",
-            title: "Avoiding situations that make you feel anxious?",
-          },
-          {
-            question_id: "question_h",
-            title:
-              "Drinking at least 4 drinks of any kind of alcohol in a single day?",
-          },
-        ],
-      },
-    ],
-    display_name: "BDS",
-  },
-  full_name: "Blueprint Diagnostic Screener",
-};
+import { useRouter } from "next/navigation";
+interface DiagnosticScreener {
+  id: string;
+  name: string;
+  disorder: string;
+}
 
 export default function Home() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [answers, setAnswers] = useState<
-    Array<{ value: number; question_id: string }>
-  >([]);
+  const router = useRouter();
+  const [screeners, setScreeners] = useState<DiagnosticScreener[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const questions = screenerData.content.sections[0].questions;
-  const answerOptions = screenerData.content.sections[0].answers;
-
-  const handleAnswer = (value: number) => {
-    const newAnswer = {
-      value,
-      question_id: questions[currentQuestionIndex].question_id,
+  useEffect(() => {
+    const fetchScreeners = async () => {
+      try {
+        const response = await fetch("/api/fetchScreeners");
+        if (!response.ok) {
+          throw new Error("Failed to fetch screeners");
+        }
+        const data = await response.json();
+        setScreeners(data);
+        setIsLoaded(true);
+      } catch (error) {
+        console.error("Error fetching screeners:", error);
+      }
     };
-    setAnswers((prevAnswers) => [...prevAnswers, newAnswer]);
 
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      console.log(JSON.stringify({ answers: answers }, null, 2));
-      // Here you would typically send the data to your backend
-    }
+    fetchScreeners();
+  }, []);
+
+  const handleScreenerSelect = (screenerId: string) => {
+    // Handle screener selection, e.g., navigate to the screener page
+    console.log(`Selected screener: ${screenerId}`);
+    router.push(`/screeners/${screenerId}`);
   };
 
   return (
     <Container maxW="container.md" py={10}>
-      <VStack spacing={6} align="stretch">
-        <Heading size="lg">{screenerData.content.display_name}</Heading>
-        <Text fontWeight="bold">{screenerData.content.sections[0].title}</Text>
-        <Progress value={(currentQuestionIndex / questions.length) * 100} />
-        <Box>
-          <Text mb={4}>
-            Question {currentQuestionIndex + 1} of {questions.length}
-          </Text>
-          <Heading size="md" mb={6}>
-            {questions[currentQuestionIndex].title}
+      <Fade in={isLoaded} transition={{ enter: { duration: 0.5 } }}>
+        <VStack spacing={8} align="stretch" justify="center" height="80vh">
+          <Heading size="xl" textAlign="center">
+            Welcome to Blueprint Health
           </Heading>
+          <Text fontSize="xl" textAlign="center">
+            Please select your diagnostic
+          </Text>
           <VStack spacing={4} align="stretch">
-            {answerOptions.map((option) => (
+            {screeners.map((screener) => (
               <Button
-                key={option.value}
-                onClick={() => handleAnswer(option.value)}
+                key={screener.id}
+                colorScheme="blue"
+                size="lg"
+                onClick={() => handleScreenerSelect(screener.id)}
               >
-                {option.title}
+                {screener.name}
               </Button>
             ))}
           </VStack>
-        </Box>
-      </VStack>
+        </VStack>
+      </Fade>
     </Container>
   );
 }
