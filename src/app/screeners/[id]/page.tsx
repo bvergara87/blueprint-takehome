@@ -14,7 +14,9 @@ import {
 } from "@chakra-ui/react";
 import { useScreener } from "./hooks/useScreener";
 
+// Main component for the Screener page
 const ScreenerPage = ({ params }: { params: { id: string } }) => {
+  // Use custom hook to manage screener state and logic
   const {
     screener,
     currentSectionIndex,
@@ -30,6 +32,7 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
     handleSubmit,
   } = useScreener(params.id);
 
+  // Show loading spinner while fetching screener data
   if (isLoading) {
     return (
       <Container centerContent height="80vh">
@@ -41,6 +44,7 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
     );
   }
 
+  // Display error message if screener data couldn't be loaded
   if (error || !screener) {
     return (
       <Container centerContent height="80vh">
@@ -49,6 +53,7 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
     );
   }
 
+  // Extract current section and questions data
   const currentSection = screener.sections[currentSectionIndex];
   const questions = currentSection.questions;
   const answerOptions = currentSection.answerOptions;
@@ -58,6 +63,7 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
       <VStack spacing={6} align="stretch">
         <Heading size="lg">{screener.name}</Heading>
         <Text fontWeight="bold">{currentSection.title}</Text>
+        {/* Progress bar to show completion status */}
         <Progress
           value={
             ((currentSectionIndex * questions.length +
@@ -74,6 +80,7 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
           <Heading size="md" mb={6}>
             {questions[currentQuestionIndex].title}
           </Heading>
+          {/* Render answer options */}
           <VStack spacing={4} align="stretch">
             {answerOptions.map((option: any) => {
               const isSelected = answers.some(
@@ -95,6 +102,7 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
               );
             })}
           </VStack>
+          {/* Navigation buttons */}
           <HStack justifyContent="space-between" mt={6}>
             <Button
               onClick={handleBack}
@@ -107,6 +115,7 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
             {isComplete &&
             currentSectionIndex === screener.sections.length - 1 &&
             currentQuestionIndex === questions.length - 1 ? (
+              // Show submit button on last question if all questions are answered
               <Button
                 isLoading={submitLoading}
                 colorScheme="green"
@@ -115,6 +124,7 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
                 Submit
               </Button>
             ) : (
+              // Show next button if not on last question and current question is answered
               <Button
                 onClick={handleForward}
                 sx={{
