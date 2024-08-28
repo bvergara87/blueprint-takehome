@@ -21,6 +21,7 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
     currentQuestionIndex,
     answers,
     isLoading,
+    submitLoading,
     error,
     isComplete,
     handleAnswer,
@@ -32,7 +33,10 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
   if (isLoading) {
     return (
       <Container centerContent height="80vh">
-        <Spinner size="xl" />
+        <VStack height="100%" justifyContent="center" alignItems="center">
+          <Spinner size="xl" color="blue.500" />
+          <Text>Loading Diagnostic...</Text>
+        </VStack>
       </Container>
     );
   }
@@ -103,7 +107,11 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
             {isComplete &&
             currentSectionIndex === screener.sections.length - 1 &&
             currentQuestionIndex === questions.length - 1 ? (
-              <Button colorScheme="green" onClick={handleSubmit}>
+              <Button
+                isLoading={submitLoading}
+                colorScheme="green"
+                onClick={handleSubmit}
+              >
                 Submit
               </Button>
             ) : (

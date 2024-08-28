@@ -16,16 +16,40 @@ interface DomainScore {
   [key: string]: number;
 }
 
-const DOMAIN_MAPPING_FILE = path.join(
-  process.cwd(),
-  "data",
-  "domainMapping.json"
-);
-
-async function getDomainMapping(): Promise<DomainMapping[]> {
-  const data = await fs.readFile(DOMAIN_MAPPING_FILE, "utf-8");
-  return JSON.parse(data);
-}
+const domainMapping = [
+  {
+    question_id: "question_a",
+    domain: "depression",
+  },
+  {
+    question_id: "question_b",
+    domain: "depression",
+  },
+  {
+    question_id: "question_c",
+    domain: "mania",
+  },
+  {
+    question_id: "question_d",
+    domain: "mania",
+  },
+  {
+    question_id: "question_e",
+    domain: "anxiety",
+  },
+  {
+    question_id: "question_f",
+    domain: "anxiety",
+  },
+  {
+    question_id: "question_g",
+    domain: "anxiety",
+  },
+  {
+    question_id: "question_h",
+    domain: "substance_use",
+  },
+];
 
 function calculateDomainScores(
   answers: Answer[],
@@ -66,17 +90,14 @@ export async function POST(request: Request) {
   try {
     const { answers } = await request.json();
 
-    if (!Array.isArray(answers) || answers.length === 0) {
+    if (!answers || !Array.isArray(answers) || answers.length === 0) {
       return NextResponse.json(
         { error: "Invalid input format" },
         { status: 400 }
       );
     }
-
-    const domainMapping = await getDomainMapping();
     const domainScores = calculateDomainScores(answers, domainMapping);
     const results = determineAssessments(domainScores);
-
     return NextResponse.json({ results });
   } catch (error) {
     console.error("Error processing request:", error);

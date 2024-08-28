@@ -1,23 +1,25 @@
 import { useState, useEffect, useCallback } from "react";
-
+import { useRouter } from "next/navigation";
 interface Answer {
   value: number;
   question_id: string;
 }
 
 export const useScreener = (screenerId: string) => {
+  const router = useRouter();
   const [screener, setScreener] = useState<any>(null);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
     const fetchScreener = async () => {
       try {
-        const response = await fetch(`/api/loadScreener?id=${screenerId}`);
+        const response = await fetch(`/api/loadScreener/${screenerId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch screener");
         }
@@ -83,9 +85,19 @@ export const useScreener = (screenerId: string) => {
     }
   }, [screener, currentSectionIndex, currentQuestionIndex]);
 
-  const handleSubmit = useCallback(() => {
-    console.log(JSON.stringify({ answers }, null, 2));
-    // Here you would typically send the data to your backend
+  const handleSubmit = useCallback(async () => {
+    setSubmitLoading(true);
+    const response = await fetch("/api/parsePatientScreenerResponse", {
+      method: "POST",
+      body: JSON.stringify({ answers }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    setSubmitLoading(false);
+    router.push("/screeners/completed");
   }, [answers]);
 
   return {
@@ -94,6 +106,7 @@ export const useScreener = (screenerId: string) => {
     currentQuestionIndex,
     answers,
     isLoading,
+    submitLoading,
     error,
     isComplete,
     handleAnswer,

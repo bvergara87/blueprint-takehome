@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import prisma from "../../../../lib/prisma";
+import prisma from "../../../../../lib/prisma";
 
-export async function GET(request: Request) {
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get("id");
-
-    if (!id) {
+    if (!params || !params.id) {
       return NextResponse.json(
         { error: "Missing id parameter" },
         { status: 400 }
@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     }
 
     const screener = await prisma.diagnosticScreener.findUnique({
-      where: { id },
+      where: { id: params.id },
       include: {
         sections: {
           include: {
@@ -24,7 +24,6 @@ export async function GET(request: Request) {
         },
       },
     });
-    console.log(screener);
     if (!screener) {
       return NextResponse.json(
         { error: "Screener not found" },
