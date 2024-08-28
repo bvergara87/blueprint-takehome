@@ -1,3 +1,4 @@
+// Used to mock API routes for testing
 import { testApiHandler } from "next-test-api-route-handler";
 import * as appHandler from "../parsePatientScreenerResponse/route";
 describe("parsePatientScreenerResponse API", () => {

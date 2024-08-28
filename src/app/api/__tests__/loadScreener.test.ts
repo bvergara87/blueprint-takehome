@@ -1,8 +1,9 @@
+// Used to mock API routes for testing
 import { testApiHandler } from "next-test-api-route-handler";
 import * as appHandler from "../loadScreener/[id]/route";
 
 describe("loadScreener API", () => {
-  it("should return a screener when given a valid ID", async () => {
+  it("should return a BPDS Screener when given the valid ID", async () => {
     await testApiHandler({
       params: { id: "abcd-123" },
       appHandler,
