@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "prisma generate && next build && jest",
     "start": "next start",
     "lint": "next lint",
+    "test": "jest",
     "postinstall": "prisma generate"
   },
   "dependencies": {
@@ -17,15 +18,18 @@
     "@prisma/client": "^5.18.0",
     "framer-motion": "^11.3.30",
     "next": "14.2.6",
+    "next-test-api-route-handler": "^4.0.8",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.24.8",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.6",
+    "jest": "^29.7.0",
     "prisma": "^5.18.0",
     "ts-node": "^10.9.2",
     "typescript": "^5"
