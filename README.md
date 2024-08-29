@@ -108,7 +108,7 @@ This approach would ensure high availability, scalability, and maintainability o
 
 ## Trade-offs
 
-In this project, I chose to leverage Next.js and Vercel for their excellent developer experience and ability to showcase my skills effectively. This decision allowed me to create a clean, efficient codebase that's easily comprehensible to other developers.
+In this project, I chose to leverage Next.js and Vercel for their excellent developer experience and ability to showcase my skills effectively. This decision allowed me to create a (somewhat) clean, efficient codebase that's easily comprehensible to other developers.
 
 However, I'm aware of the trade-offs involved in selecting a serverless framework. While Vercel claims to offer scalability, there are potential limitations compared to more traditional setups like Nest.js or Express backends, particularly in terms of feature-set (WebSockets, background workers, etc.), modularity and scalability at enterprise levels.
 
@@ -121,7 +121,7 @@ For this demonstration, I prioritized rapid development and simplicity. As the p
 5. Added security middleware
    etc.
 
-Additionally, I didn't implement the full suite of production-level tools, frameworks, or robust deployment strategies that I would typically use in a production environment. These decisions were made consciously to balance showcasing my skills with maintaining a manageable scope for the project.
+Additionally, I didn't implement the full suite of production-level tools, styling best practices, or robust deployment strategies that I would typically use in a production environment. These decisions were made consciously to balance showcasing my skills with maintaining a manageable scope for the project.
 
 In a real-world scenario, I would adopt a more comprehensive approach, incorporating these additional features and utilizing enterprise-grade tools to ensure scalability, security, and maintainability. The current implementation serves as a foundation that can be expanded upon to meet the demands of a full-scale, production-ready application.
 

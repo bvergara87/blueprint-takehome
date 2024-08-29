@@ -11,6 +11,7 @@ import {
   Button,
   Fade,
   HStack,
+  Spinner,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import Wave from "react-wavify";
@@ -51,7 +52,7 @@ export default function Home() {
 
   return (
     <Container maxW="container.md" py={10}>
-      <Fade in={isLoaded} transition={{ enter: { duration: 0.5 } }}>
+      <Fade in transition={{ enter: { duration: 0.5 } }}>
         <VStack spacing={8} align="stretch" justify="center" height="90vh">
           <HStack justify="center" align="center">
             <Heading size="xl" textAlign="center">
@@ -63,20 +64,26 @@ export default function Home() {
             Please select your diagnostic
           </Text>
           <VStack spacing={4} align="stretch">
-            {screeners.map((screener) => (
-              <Button
-                key={screener.id}
-                color="white"
-                bg="#2D53E7"
-                _hover={{
-                  bg: "rgba(45, 83, 231, 0.8)",
-                }}
-                size="lg"
-                onClick={() => handleScreenerSelect(screener.id)}
-              >
-                {screener.name}
-              </Button>
-            ))}
+            {isLoaded ? (
+              screeners.map((screener: DiagnosticScreener) => (
+                <Button
+                  key={screener.id}
+                  color="white"
+                  bg="#2D53E7"
+                  _hover={{
+                    bg: "rgba(45, 83, 231, 0.8)",
+                  }}
+                  size="lg"
+                  onClick={() => handleScreenerSelect(screener.id)}
+                >
+                  {screener.name}
+                </Button>
+              ))
+            ) : (
+              <HStack mt={4} justify="center" align="center">
+                <Spinner size="lg" color="#2D53E7" />
+              </HStack>
+            )}
           </VStack>
         </VStack>
       </Fade>
@@ -88,7 +95,7 @@ export default function Home() {
           style={{ display: "flex" }}
           options={{
             height: 20,
-            amplitude: 20,
+            amplitude: 40,
             speed: 0.15,
             points: 3,
           }}
