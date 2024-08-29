@@ -61,7 +61,7 @@ Prisma was chosen as the ORM tool due to:
 
 ## How would I deploy this as a true production app on the platform of my choice?
 
-Despite my preference for serverless, I would choose a more traditional stack with React on the frontend, and Nest.js for the backend for scale. Presumably, we would be working with hundreds of thousands of patients and providers, each with the potential to generate a large amount of data (Survey data, activity data, Personal Identifiable Information, etc). Given that, I would choose a more traditional stack with a containerized approach to ensure scalability and maintainability.
+Despite my preference for serverless, I would choose a more traditional stack with React on the frontend, and Nest.js for the backend for scale. Presumably, we would be working with hundreds of thousands of patients and providers, each with the potential to generate a large amount of data (Survey data, activity data, Personal Identifiable Information, etc). Given that, I would choose a more traditional stack with a containerized approach to ensure scalability and maintainability. Also I haven't quite figured out to fix the typing issues with Next.js and Vercel yet when testing the API endpoints with Jest, something that wouldn't be an issue with a more traditional framework.
 
 To deploy this as a true production app at enterprise scale, I would choose a cloud platform like AWS or Google Cloud Platform.
 
@@ -121,7 +121,7 @@ For this demonstration, I prioritized rapid development and simplicity. As the p
 5. Added security middleware
    etc.
 
-Additionally, I didn't implement the full suite of production-level tools, styling best practices, or robust deployment strategies that I would typically use in a production environment. These decisions were made consciously to balance showcasing my skills with maintaining a manageable scope for the project.
+Additionally, I didn't implement the full suite of production-level tools, styling best practices, or robust deployment strategies that I would typically use in a production environment. These decisions were made consciously to balance showcasing my skills with maintaining a manageable scope for the project. Again to reiterate, I haven't quite figured out to fix the typing issues with Next.js and Vercel yet when testing the API endpoints with Jest (I did not write a ton of unit tests on my side projects, but I'm a big proponent of TDD) if I spent more time I would figure that out or simply implement a CI/CD pipeline with a more traditional framework.
 
 In a real-world scenario, I would adopt a more comprehensive approach, incorporating these additional features and utilizing enterprise-grade tools to ensure scalability, security, and maintainability. The current implementation serves as a foundation that can be expanded upon to meet the demands of a full-scale, production-ready application.
 
