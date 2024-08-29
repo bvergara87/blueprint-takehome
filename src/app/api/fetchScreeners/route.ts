@@ -1,8 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
-import { NextApiRequest } from "next";
 
-export async function GET(request: NextApiRequest) {
+export async function GET(request: NextRequest) {
   try {
     const screeners = await prisma.diagnosticScreener.findMany();
     return NextResponse.json(screeners);

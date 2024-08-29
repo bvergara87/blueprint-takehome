@@ -6,7 +6,6 @@ import { createMocks } from "node-mocks-http";
 
 import { POST } from "../parsePatientScreenerResponse/route";
 import { NextRequest } from "next/server";
-import { NextApiRequest } from "next";
 
 describe("/api/parsePatientScreenerResponse", () => {
   it("should parse the response and return results", async () => {
@@ -26,7 +25,7 @@ describe("/api/parsePatientScreenerResponse", () => {
       },
     });
 
-    const response = await POST(req as unknown as NextApiRequest);
+    const response = await POST(req as unknown as NextRequest);
 
     expect(response.status).toBe(200);
     const data = await response.json();
@@ -43,7 +42,7 @@ describe("/api/parsePatientScreenerResponse", () => {
       body: {},
     });
 
-    const response = await POST(req as unknown as NextApiRequest);
+    const response = await POST(req as unknown as NextRequest);
 
     expect(response.status).toBe(400);
   });
@@ -53,7 +52,7 @@ describe("/api/parsePatientScreenerResponse", () => {
       method: "GET",
     });
 
-    const response = await POST(req as unknown as NextApiRequest);
+    const response = await POST(req as unknown as NextRequest);
 
     expect(response.status).toBe(405);
   });

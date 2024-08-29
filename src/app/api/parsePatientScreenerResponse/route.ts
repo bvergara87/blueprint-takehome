@@ -1,4 +1,3 @@
-import { NextApiRequest } from "next";
 import { NextRequest, NextResponse } from "next/server";
 
 // TODO: for simplicity I added the types here but we would want to move these to a shared library with Polymorphic types as not all assessments will have the same fields.
@@ -87,11 +86,9 @@ function determineAssessments(domainScores: DomainScore): string[] {
   return assessments;
 }
 
-export async function POST(request: NextApiRequest) {
+export async function POST(request: NextRequest) {
   try {
-    const { answers } = request.body as {
-      answers: Answer[];
-    };
+    const { answers } = await request.json();
 
     if (request.method !== "POST") {
       return NextResponse.json(

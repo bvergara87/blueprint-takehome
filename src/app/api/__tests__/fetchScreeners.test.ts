@@ -3,8 +3,8 @@
  */
 import { createMocks } from "node-mocks-http";
 import { GET } from "../fetchScreeners/route";
-import { NextApiRequest } from "next";
 import prisma from "../../../../lib/prisma";
+import { NextRequest } from "next/server";
 
 jest.mock("../../../../lib/prisma", () => ({
   diagnosticScreener: {
@@ -32,7 +32,7 @@ describe("fetchScreeners API", () => {
       method: "GET",
     });
 
-    const response = await GET(req as unknown as NextApiRequest);
+    const response = await GET(req as unknown as NextRequest);
 
     expect(response.status).toBe(200);
     const data = await response.json();
@@ -51,7 +51,7 @@ describe("fetchScreeners API", () => {
       method: "GET",
     });
 
-    const response = await GET(req as unknown as NextApiRequest);
+    const response = await GET(req as unknown as NextRequest);
 
     expect(response.status).toBe(500);
     const data = await response.json();

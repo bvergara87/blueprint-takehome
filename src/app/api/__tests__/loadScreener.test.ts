@@ -4,7 +4,7 @@
 // Used to mock API routes for testing
 import { createMocks } from "node-mocks-http";
 import { GET } from "../loadScreener/[id]/route";
-import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 
 describe("loadScreener API", () => {
   it("should return a BPDS Screener when given the valid ID", async () => {
@@ -13,7 +13,7 @@ describe("loadScreener API", () => {
       query: { id: "abcd-123" },
     });
 
-    const response = await GET(req as unknown as NextApiRequest, {
+    const response = await GET(req as unknown as NextRequest, {
       params: { id: "abcd-123" },
     });
 
@@ -59,7 +59,7 @@ describe("loadScreener API", () => {
       query: { id: "nonexistent" },
     });
 
-    const response = await GET(req as unknown as NextApiRequest, {
+    const response = await GET(req as unknown as NextRequest, {
       params: { id: "nonexistent" },
     });
 
@@ -73,7 +73,7 @@ describe("loadScreener API", () => {
       method: "GET",
     });
 
-    const response = await GET(req as unknown as NextApiRequest, {
+    const response = await GET(req as unknown as NextRequest, {
       params: { id: "" },
     });
 
