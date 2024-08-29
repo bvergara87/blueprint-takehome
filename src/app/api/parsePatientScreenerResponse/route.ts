@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { NextApiRequest } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
+// TODO: for simplicity I added the types here but we would want to move these to a shared library with Polymorphic types as not all assessments will have the same fields.
 interface Answer {
   value: number;
   question_id: string;
@@ -16,6 +16,7 @@ interface DomainScore {
   [key: string]: number;
 }
 
+// TODO: we could have each of the questions in the db have an added field that references it's domain as opposed to loading this from memory.
 const domainMapping = [
   {
     question_id: "question_a",
@@ -86,10 +87,18 @@ function determineAssessments(domainScores: DomainScore): string[] {
   return assessments;
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextApiRequest) {
   try {
-    const { answers } = await request.json();
+    const { answers } = request.body as {
+      answers: Answer[];
+    };
 
+    if (request.method !== "POST") {
+      return NextResponse.json(
+        { error: "Method not allowed" },
+        { status: 405 }
+      );
+    }
     if (!answers || !Array.isArray(answers) || answers.length === 0) {
       return NextResponse.json(
         { error: "Invalid input format" },
