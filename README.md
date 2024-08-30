@@ -117,24 +117,15 @@ This approach would ensure high availability, scalability, and maintainability o
 
 In this project, I chose to leverage Next.js and Vercel for the frameworks speed and performance for quick deployment. This decision allowed me to create a (somewhat) clean, efficient codebase that's easily comprehensible to other developers.
 
-However, I'm aware of the trade-offs involved in selecting a serverless framework. There are potential limitations compared to more traditional setups like Nest.js or Express backends, particularly in terms of feature-set (WebSockets, background workers, etc.), modularity and scalability at enterprise levels.
+However, there are potential limitations with a serverless deployment like Next.js compared to more traditional setups like Nest.js or Express backends e.g. feature-set (WebSockets, background workers, etc.), modularity and scalability at enterprise levels. Next.js and Vercel are amazing on the frontend side, but I would definitely choose a more traditional backend for a production app.
 
-This approach meant omitting several features that I would have liked to add in an extended solution such as:
-
-1. User Authentication
-2. Patient Portal for History
-3. Provider Portal
-4. Comprehensive Typing Library
-5. Added security middleware
-   etc.
-
-In a real-world scenario, I would adopt a more comprehensive approach, incorporating these additional features and utilizing enterprise-grade tools to ensure scalability, security, and maintainability. The current implementation serves as a foundation that can be expanded upon to meet the demands of a full-scale, production-ready application.
+In a real-world scenario, I would adopt a more comprehensive approach, incorporating these additional features and utilizing enterprise-grade tools to ensure scalability, security, and maintainability. I would also add a more comprehensive test suite and implement a CI/CD pipeline. The current implementation serves as a foundation that can be expanded upon to meet the demands of a full-scale, production-ready application.
 
 ## Notes for Consideration
 
 - The testing suite is not complete, I ran into issues with typing and deployment with Next.js and Vercel, where the build would fail due to dynamic imports that vercel couldn't handle and typescript errors that I wasn't able to resolve in the time I spent on this. (The tests do run locally if I change NextRequest -> NextApiRequest, but obviously on a production app this would be a non-starter and I'd have to rewrite the tests to work with that.)
 - I implemented the UI pretty quickly, but I didn't go all out on the styling and therefore used in-line styling to get the job done.
-- I didn't implement any authentication, though I would have liked to add some patient identification to the data and add middleware with tokenized authentication (Clerk, auth0, etc) for added security.
+- I did not implement any authentication, though I would have liked to add some patient identification to the data and add middleware with tokenized authentication (Clerk, auth0, etc) for added security. This would also extend into patient submission history and something like a Patient/Provider Portal for viewing history, updating information, etc.
 
 ## Links
 
