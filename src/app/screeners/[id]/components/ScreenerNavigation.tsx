@@ -1,7 +1,7 @@
 import React from "react";
 import { HStack, Button } from "@chakra-ui/react";
 
-type IScreenerNavigation = {
+interface IScreenerNavigation {
   currentSectionIndex: number;
   currentQuestionIndex: number;
   isComplete: boolean;
@@ -11,7 +11,7 @@ type IScreenerNavigation = {
   handleBack: () => void;
   handleForward: () => void;
   handleSubmit: () => void;
-};
+}
 
 const ScreenerNavigation = ({
   currentSectionIndex,

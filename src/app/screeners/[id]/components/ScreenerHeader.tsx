@@ -1,14 +1,14 @@
 import React from "react";
 import { Heading, Text, Progress } from "@chakra-ui/react";
 
-type IScreenerHeader = {
+interface IScreenerHeader {
   screenerSectionsLength: number;
   screenerName: string;
   currentSectionTitle: string;
   currentSectionIndex: number;
   currentQuestionIndex: number;
   questionLength: number;
-};
+}
 
 const ScreenerHeader = ({
   screenerSectionsLength,

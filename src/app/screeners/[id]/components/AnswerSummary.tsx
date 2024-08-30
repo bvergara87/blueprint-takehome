@@ -7,14 +7,14 @@ import {
   ScreenerSectionQuestion,
 } from "@/app/types/screener";
 
-type IAnswerSummary = {
+interface IAnswerSummary {
   answers: ScreenerAnswer[];
   navToQuestion: (sectionIndex: number, questionIndex: number) => void;
   handleBack: () => void;
   handleSubmit: () => void;
   screener: any;
   submitLoading: boolean;
-};
+}
 
 const AnswerSummary = ({
   answers,

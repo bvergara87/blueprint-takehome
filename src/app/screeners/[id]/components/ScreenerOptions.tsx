@@ -2,14 +2,14 @@ import React from "react";
 import { Box, Text, Heading, VStack, Button } from "@chakra-ui/react";
 import { Answer } from "@prisma/client";
 
-type IScreenerOptions = {
+interface IScreenerOptions {
   question: any;
   answerOptions: any[];
   currentAnswer: any;
   onAnswer: (value: number) => void;
   questionNumber: number;
   totalQuestions: number;
-};
+}
 
 const ScreenerOptions = ({
   question,
