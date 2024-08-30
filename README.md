@@ -20,6 +20,7 @@ My solution is a Next.js-based web application hosted on Vercel. The application
 ## Project Structure
 
 - `src/app`: Contains the main application code
+  - `/`: Home page with list of available screeners
   - `/screeners/[id]`: Dynamic route for individual screeners
   - `/completed`: Acknowledgement page for completed screeners and submission success
   - `/api`: API routes for handling data
@@ -88,27 +89,22 @@ To deploy this as a true production app at enterprise scale, I would choose a cl
 
    - Implement a caching layer using Redis to improve performance of data that doesn't change often and is pulled repeatedly (e.g. list of available screeners, screener questions, etc).
 
-5. CDN:
-
-   - Use a Content Delivery Network (CDN) like Cloudflare or AWS CloudFront to serve static assets globally.
-
-6. Monitoring and Logging:
+5. Monitoring and Logging:
 
    - Set up comprehensive monitoring using tools like Sentry.
 
-7. Security:
+6. Security:
 
-   - Add token based authentication and authorization using tools like Auth0 or Okta.
+   - Add authentication and authorization using tools like Auth0 or Clerk.
    - Make sure to scrub/anonymize any PII before storing data.
-   - Implement WAF (Web Application Firewall) for protection against common web exploits.
    - Use secrets management tools like AWS Secrets Manager or HashiCorp Vault.
 
-8. Disaster Recovery:
+7. Disaster Recovery:
 
    - Set up regular backups and a disaster recovery plan.
    - Implement multi-region deployment for increased resilience.
 
-9. UI:
+8. UI:
    - Implement responsive design for various devices.
    - Remove inline styles and replace proper SCSS styles.
 
@@ -129,7 +125,7 @@ For this demonstration, I prioritized rapid development and simplicity. As the p
 5. Added security middleware
    etc.
 
-Additionally, I didn't implement the full suite of production-level tools, styling best practices, or robust deployment strategies that I would typically use in a production environment. These decisions were made consciously to balance showcasing my skills with maintaining a manageable scope for the project. Again to reiterate, I haven't quite figured out to fix the typing/deployment issues with Next.js and Vercel yet when testing the API endpoints with Jest (I did not write a ton of unit tests on my side projects, but I'm a big proponent of TDD) if I spent more time I would figure that out or simply implement a CI/CD pipeline with a more traditional framework.
+Additionally, I didn't implement the full suite of production-level tools, styling best practices, or robust deployment strategies that I would typically use in a production environment. These decisions were made consciously to balance showcasing my skills with maintaining a manageable scope for the project. I haven't quite figured out to fix the typing/deployment issues with Next.js and Vercel yet when testing the API endpoints with Jest (I did not write a ton of unit tests on my side projects, but I'm a big proponent of TDD) if I spent more time I would figure that out or simply implement a CI/CD pipeline with a more traditional framework.
 
 In a real-world scenario, I would adopt a more comprehensive approach, incorporating these additional features and utilizing enterprise-grade tools to ensure scalability, security, and maintainability. The current implementation serves as a foundation that can be expanded upon to meet the demands of a full-scale, production-ready application.
 
