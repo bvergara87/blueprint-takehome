@@ -34,7 +34,16 @@ const CompletedPage = () => {
           Your provider will review your responses and contact you if any
           follow-up is needed.
         </Text>
-        <Button colorScheme="blue" onClick={handleReturnHome} size="lg" mt={4}>
+        <Button
+          bg="#2D53E6"
+          color="white"
+          _hover={{
+            bg: "rgba(45, 83, 231, 0.8)",
+          }}
+          onClick={handleReturnHome}
+          size="lg"
+          mt={4}
+        >
           Return to Home
         </Button>
       </VStack>

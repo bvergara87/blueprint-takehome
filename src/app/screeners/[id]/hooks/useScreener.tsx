@@ -1,11 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-
-// Define the structure of an answer
-interface Answer {
-  value: number;
-  question_id: string;
-}
+import { ScreenerAnswer } from "@/app/types/screener";
 
 export const useScreener = (screenerId: string) => {
   const router = useRouter();
@@ -13,7 +8,7 @@ export const useScreener = (screenerId: string) => {
   const [screener, setScreener] = useState<any>(null);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<Answer[]>([]);
+  const [answers, setAnswers] = useState<ScreenerAnswer[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -50,7 +45,11 @@ export const useScreener = (screenerId: string) => {
         ...prevAnswers.filter(
           (a) => a.question_id !== questions[currentQuestionIndex].questionId
         ),
-        { value, question_id: questions[currentQuestionIndex].questionId },
+        {
+          value,
+          question_id: questions[currentQuestionIndex].questionId,
+          section_id: currentSection.id,
+        },
       ]);
 
       // Move to next question or section
@@ -85,7 +84,9 @@ export const useScreener = (screenerId: string) => {
     const currentSection = screener.sections[currentSectionIndex];
     const questions = currentSection.questions;
 
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex === questions.length - 1) {
+      setIsComplete(true);
+    } else if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else if (currentSectionIndex < screener.sections.length - 1) {
       setCurrentSectionIndex((prev) => prev + 1);
@@ -119,8 +120,11 @@ export const useScreener = (screenerId: string) => {
     submitLoading,
     error,
     isComplete,
+    setIsComplete,
     handleAnswer,
     handleBack,
+    setCurrentSectionIndex,
+    setCurrentQuestionIndex,
     handleForward,
     handleSubmit,
   };

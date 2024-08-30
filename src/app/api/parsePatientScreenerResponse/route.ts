@@ -1,20 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-
-// TODO: for simplicity I added the types here but we would want to move these to a shared library with Polymorphic types as not all assessments will have the same fields.
-interface Answer {
-  value: number;
-  question_id: string;
-}
-
-interface DomainMapping {
-  question_id: string;
-  domain: string;
-}
-
-interface DomainScore {
-  [key: string]: number;
-}
-
+import {
+  ScreenerAnswer,
+  ScreenerDomainMapping,
+  ScreenerDomainScore,
+} from "@/app/types/screener";
 // TODO: we could have each of the questions in the db have an added field that references it's domain as opposed to loading this from memory.
 const domainMapping = [
   {
@@ -52,10 +41,10 @@ const domainMapping = [
 ];
 
 function calculateDomainScores(
-  answers: Answer[],
-  domainMapping: DomainMapping[]
-): DomainScore {
-  return answers.reduce((domainScores: DomainScore, answer) => {
+  answers: ScreenerAnswer[],
+  domainMapping: ScreenerDomainMapping[]
+): ScreenerDomainScore {
+  return answers.reduce((domainScores: ScreenerDomainScore, answer) => {
     const mapping = domainMapping.find(
       (m) => m.question_id === answer.question_id
     );
@@ -67,7 +56,7 @@ function calculateDomainScores(
   }, {});
 }
 
-function determineAssessments(domainScores: DomainScore): string[] {
+function determineAssessments(domainScores: ScreenerDomainScore): string[] {
   const assessments: string[] = [];
 
   if (domainScores.depression >= 2 || domainScores.anxiety >= 2) {
