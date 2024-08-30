@@ -90,6 +90,9 @@ export async function POST(request: NextRequest) {
     }
     const domainScores = calculateDomainScores(answers, domainMapping);
     const results = determineAssessments(domainScores);
+    // Would be good to log the results to a db here or do something with them linked to a patient.
+    // This was not required in the exercise but is the logical next step.
+    console.log("results: " + results);
     return NextResponse.json({ results });
   } catch (error) {
     console.error("Error processing request:", error);

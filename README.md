@@ -9,13 +9,14 @@ We are tasked with 2 objectives:
 - 1. Create an API endpoint that accepts a set of answers from a diagnostic screener and returns an array of Level-2 Assessments if needed
 - 2. Create an application designed to serve mental health screenings. It allows users to complete diagnostic questionnaires and submit their responses for review by healthcare providers.
 
-My solution is a Next.js-based web application hosted on Vercel. The application is designed to be highly available and performant. It is secure and allows for easy troubleshooting.
+My solution is a Next.js-based web application hosted on Vercel using Postgres and Prisma. I decided to deploy my solution as a web application for simplicity and felt the scope of the project would be better suited for that.
 
-## Features
+In the app you can:
 
-- Dynamic loading of screener questionnaires
-- Multi-section questionnaires with progress tracking
-- Summary of patient responses and navigation to change answers
+- View a list of available screeners
+- View a screener questionnaire and answer the questions
+- View the summary of your answers and navigate to change answers
+- Ping the API to submit your answers and log a set of Level-2 Assessments that can be used to inform treatment plans (Level-2 Assessments are not displayed only logged in the console)
 
 ## Project Structure
 
@@ -39,7 +40,7 @@ My solution is a Next.js-based web application hosted on Vercel. The application
 
 ## Technical Choices
 
-For this project, I chose Next.js 13 with App Router for its:
+For this project, I chose Next.js 14 with App Router for its:
 
 1. Serverless capabilities for efficient scaling
 2. Intuitive routing with App Router
