@@ -5,7 +5,7 @@ const LoadingSpinner = () => (
   <Container centerContent height="80vh">
     <VStack height="100%" justifyContent="center" alignItems="center">
       <Spinner size="xl" color="#2D53E7" />
-      <Text>Loading Diagnostic...</Text>
+      <Text mt={4}>Loading Diagnostic...</Text>
     </VStack>
   </Container>
 );

@@ -67,6 +67,7 @@ const ScreenerPage = ({ params }: { params: { id: string } }) => {
       <Card p={6} boxShadow="none" border="1px solid #E2E8F0">
         {isComplete ? (
           <AnswerSummary
+            submitLoading={submitLoading}
             navToQuestion={(sectionIndex: number, questionIndex: number) => {
               setCurrentSectionIndex(sectionIndex);
               setCurrentQuestionIndex(questionIndex);

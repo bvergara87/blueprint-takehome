@@ -13,6 +13,7 @@ type IAnswerSummary = {
   handleBack: () => void;
   handleSubmit: () => void;
   screener: any;
+  submitLoading: boolean;
 };
 
 const AnswerSummary = ({
@@ -21,6 +22,7 @@ const AnswerSummary = ({
   handleSubmit,
   screener,
   navToQuestion,
+  submitLoading,
 }: IAnswerSummary) => {
   const [sectionMap, setSectionMap] = useState(new Map());
   const getQuestionAndAnswerTitles = () => {
@@ -97,7 +99,11 @@ const AnswerSummary = ({
       </VStack>
       <HStack mt={8} justify="space-between" align="center">
         <Button onClick={handleBack}>Back</Button>
-        <Button colorScheme="green" onClick={handleSubmit}>
+        <Button
+          isLoading={submitLoading}
+          colorScheme="green"
+          onClick={handleSubmit}
+        >
           Submit
         </Button>
       </HStack>

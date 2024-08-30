@@ -90,6 +90,7 @@ export async function POST(request: NextRequest) {
     }
     const domainScores = calculateDomainScores(answers, domainMapping);
     const results = determineAssessments(domainScores);
+    console.log("results", results);
     return NextResponse.json({ results });
   } catch (error) {
     console.error("Error processing request:", error);

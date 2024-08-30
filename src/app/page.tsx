@@ -12,6 +12,7 @@ import {
   Fade,
   HStack,
   Spinner,
+  Stack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import Wave from "react-wavify";
@@ -54,12 +55,12 @@ export default function Home() {
     <Container maxW="container.md" py={10}>
       <Fade in transition={{ enter: { duration: 0.5 } }}>
         <VStack spacing={8} align="stretch" justify="center" height="90vh">
-          <HStack justify="center" align="center">
+          <Stack direction={["column", "row"]} justify="center" align="center">
             <Heading size="xl" textAlign="center">
               Welcome to{" "}
             </Heading>
             <Image src="/blueprint-logo.png" w={200} alt="blueprint-logo" />
-          </HStack>
+          </Stack>
           <Text fontSize="xl" textAlign="center">
             Please select your diagnostic
           </Text>

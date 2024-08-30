@@ -13,8 +13,7 @@ My solution is a Next.js-based web application hosted on Vercel. The application
 
 - Dynamic loading of screener questionnaires
 - Multi-section questionnaires with progress tracking
-- Responsive design for various devices
-- Secure submission of user responses
+- Summary of patient responses and navigation to change answers
 
 ## Project Structure
 
@@ -101,8 +100,13 @@ To deploy this as a true production app at enterprise scale, I would choose a cl
    - Use secrets management tools like AWS Secrets Manager or HashiCorp Vault.
 
 8. Disaster Recovery:
+
    - Set up regular backups and a disaster recovery plan.
    - Implement multi-region deployment for increased resilience.
+
+9. UI:
+   - Implement responsive design for various devices.
+   - Remove inline styles and replace proper SCSS styles.
 
 This approach would ensure high availability, scalability, and maintainability of the application in a production environment.
 
@@ -129,3 +133,5 @@ In a real-world scenario, I would adopt a more comprehensive approach, incorpora
 
 - [MyLessonPal](https://github.com/bvergara87/MyLessonPal)
 - [LinkedIn/Resume](https://www.linkedin.com/in/bryant-vergara/)
+
+The vast majority the code I've worked on is in private repositories, but I have no issues with sharing code upon request.
