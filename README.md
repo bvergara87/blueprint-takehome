@@ -1,6 +1,8 @@
 # Bluprint Health Takehome Exercise
 
-https://blueprint-takehome.vercel.app/
+Time Spent: ~ 6 hours
+
+Live Site: https://blueprint-takehome.vercel.app/
 
 We are tasked with 2 objectives:
 
@@ -18,9 +20,11 @@ My solution is a Next.js-based web application hosted on Vercel. The application
 ## Project Structure
 
 - `src/app`: Contains the main application code
-  - `screeners/[id]`: Dynamic route for individual screeners
-  - `api`: API routes for handling data
+  - `/screeners/[id]`: Dynamic route for individual screeners
+  - `/completed`: Acknowledgement page for completed screeners and submission success
+  - `/api`: API routes for handling data
 - `lib`: Utility functions and shared code
+- `types`: Shared Typescript types
 - `public`: Static assets
 
 ## Technologies Used
@@ -82,7 +86,7 @@ To deploy this as a true production app at enterprise scale, I would choose a cl
 
 4. Caching:
 
-   - Implement a caching layer using Redis to improve performance of data that doesn't change often and is pulled repeatedly.
+   - Implement a caching layer using Redis to improve performance of data that doesn't change often and is pulled repeatedly (e.g. list of available screeners, screener questions, etc).
 
 5. CDN:
 
@@ -128,6 +132,12 @@ For this demonstration, I prioritized rapid development and simplicity. As the p
 Additionally, I didn't implement the full suite of production-level tools, styling best practices, or robust deployment strategies that I would typically use in a production environment. These decisions were made consciously to balance showcasing my skills with maintaining a manageable scope for the project. Again to reiterate, I haven't quite figured out to fix the typing/deployment issues with Next.js and Vercel yet when testing the API endpoints with Jest (I did not write a ton of unit tests on my side projects, but I'm a big proponent of TDD) if I spent more time I would figure that out or simply implement a CI/CD pipeline with a more traditional framework.
 
 In a real-world scenario, I would adopt a more comprehensive approach, incorporating these additional features and utilizing enterprise-grade tools to ensure scalability, security, and maintainability. The current implementation serves as a foundation that can be expanded upon to meet the demands of a full-scale, production-ready application.
+
+## Notes for Consideration
+
+- The testing suite is not complete, I ran into issues with typing and deployment with Next.js and Vercel, where the build would fail due to dynamic imports that vercel couldn't handle and typescript errors that I wasn't able to resolve in the time I spent on this. The tests do run locally if I change NextRequest -> NextApiRequest, but obviously on a production app this would be a non-starter and I'd have to rewrite the tests to work with that.
+- I implemented the UI pretty quickly, but I didn't go all out on the styling, I just wanted to get something that worked.
+- I didn't implement any authentication, though I would have liked to add some patient identification to the data and add middleware with tokenized authentication (Clerk, auth0, etc) for added security.
 
 ## Links
 
