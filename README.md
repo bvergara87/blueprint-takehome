@@ -29,18 +29,9 @@ In the app you can:
 - `types`: Shared Typescript types
 - `public`: Static assets
 
-## Technologies Used
-
-- Next.js 14 with App Router
-- Vercel for hosting
-- Postgres
-- React
-- Chakra UI for styling
-- Prisma for database operations
-
 ## Technical Choices
 
-For this project, I chose Next.js 14 with App Router for its:
+For this project, I chose Next.js 14 with App Router and for its:
 
 1. Serverless capabilities for efficient scaling
 2. Intuitive routing with App Router
@@ -61,6 +52,8 @@ Prisma was chosen as the ORM tool due to:
 2. Auto-generated migrations
 3. Intuitive API
 4. User-friendly visual interface (Prisma Studio)
+
+Deployed on Vercel
 
 (This is my stack of choice as of late due to the speed of development and the ease of use)
 
