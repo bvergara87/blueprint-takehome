@@ -70,7 +70,7 @@ Despite my preference for serverless, I would choose a more traditional stack wi
 
 Given that, I would choose a more traditional stack with a containerized approach to ensure scalability and maintainability.
 
-To deploy this as a true production app at enterprise scale, I would choose a cloud platform like AWS or Google Cloud Platform.
+To deploy this as a true production app at enterprise scale, I would deploy on a cloud platform like AWS or Google Cloud Platform with the following approach:
 
 1. Containerization:
 
@@ -107,7 +107,7 @@ To deploy this as a true production app at enterprise scale, I would choose a cl
    - Set up regular backups and a disaster recovery plan.
    - Implement multi-region deployment for increased resilience.
 
-8. UI:
+8. Responsive UI:
    - Implement responsive design for various devices.
    - Remove inline styles and replace proper SCSS styles.
 
@@ -115,11 +115,11 @@ This approach would ensure high availability, scalability, and maintainability o
 
 ## Trade-offs
 
-In this project, I chose to leverage Next.js and Vercel for their excellent developer experience and ability to showcase my skills effectively. This decision allowed me to create a (somewhat) clean, efficient codebase that's easily comprehensible to other developers.
+In this project, I chose to leverage Next.js and Vercel for the frameworks speed and performance for quick deployment. This decision allowed me to create a (somewhat) clean, efficient codebase that's easily comprehensible to other developers.
 
 However, I'm aware of the trade-offs involved in selecting a serverless framework. There are potential limitations compared to more traditional setups like Nest.js or Express backends, particularly in terms of feature-set (WebSockets, background workers, etc.), modularity and scalability at enterprise levels.
 
-As the project wasn't intended for large-scale deployment, I concentrated on implementing core functionalities and creating an intuitive UI. This approach meant omitting several features that would be crucial in a real-world scenario, such as:
+This approach meant omitting several features that I would have liked to add in an extended solution such as:
 
 1. User Authentication
 2. Patient Portal for History
@@ -133,7 +133,7 @@ In a real-world scenario, I would adopt a more comprehensive approach, incorpora
 ## Notes for Consideration
 
 - The testing suite is not complete, I ran into issues with typing and deployment with Next.js and Vercel, where the build would fail due to dynamic imports that vercel couldn't handle and typescript errors that I wasn't able to resolve in the time I spent on this. (The tests do run locally if I change NextRequest -> NextApiRequest, but obviously on a production app this would be a non-starter and I'd have to rewrite the tests to work with that.)
-- I implemented the UI pretty quickly, but I didn't go all out on the styling, I just wanted to get something that worked.
+- I implemented the UI pretty quickly, but I didn't go all out on the styling and therefore used in-line styling to get the job done.
 - I didn't implement any authentication, though I would have liked to add some patient identification to the data and add middleware with tokenized authentication (Clerk, auth0, etc) for added security.
 
 ## Links
