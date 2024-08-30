@@ -66,7 +66,9 @@ Prisma was chosen as the ORM tool due to:
 
 ## How would I deploy this as a true production app on the platform of my choice?
 
-Despite my preference for serverless, I would choose a more traditional stack with React on the frontend, and Nest.js for the backend for scale. Presumably, we would be working with hundreds of thousands of patients and providers, each with the potential to generate a large amount of data (Survey data, activity data, Personal Identifiable Information, etc). Given that, I would choose a more traditional stack with a containerized approach to ensure scalability and maintainability. Also I encountered typing and deployment issues with Next.js and Vercel with Jest and testing the API endpoints, something that wouldn't be an issue with a more traditional framework.
+Despite my preference for serverless, I would choose a more traditional stack with React on the frontend, and Nest.js for the backend for scale. Presumably, we would be working with hundreds of thousands of patients and providers, each with the potential to generate a large amount of data (Survey data, activity data, Personal Identifiable Information, etc).
+
+Given that, I would choose a more traditional stack with a containerized approach to ensure scalability and maintainability.
 
 To deploy this as a true production app at enterprise scale, I would choose a cloud platform like AWS or Google Cloud Platform.
 
@@ -115,9 +117,9 @@ This approach would ensure high availability, scalability, and maintainability o
 
 In this project, I chose to leverage Next.js and Vercel for their excellent developer experience and ability to showcase my skills effectively. This decision allowed me to create a (somewhat) clean, efficient codebase that's easily comprehensible to other developers.
 
-However, I'm aware of the trade-offs involved in selecting a serverless framework. While Vercel claims to offer scalability, there are potential limitations compared to more traditional setups like Nest.js or Express backends, particularly in terms of feature-set (WebSockets, background workers, etc.), modularity and scalability at enterprise levels.
+However, I'm aware of the trade-offs involved in selecting a serverless framework. There are potential limitations compared to more traditional setups like Nest.js or Express backends, particularly in terms of feature-set (WebSockets, background workers, etc.), modularity and scalability at enterprise levels.
 
-For this demonstration, I prioritized rapid development and simplicity. As the project wasn't intended for large-scale deployment, I concentrated on implementing core functionalities and creating an intuitive UI. This approach meant omitting several features that would be crucial in a real-world scenario, such as:
+As the project wasn't intended for large-scale deployment, I concentrated on implementing core functionalities and creating an intuitive UI. This approach meant omitting several features that would be crucial in a real-world scenario, such as:
 
 1. User Authentication
 2. Patient Portal for History
@@ -126,13 +128,11 @@ For this demonstration, I prioritized rapid development and simplicity. As the p
 5. Added security middleware
    etc.
 
-Additionally, I didn't implement the full suite of production-level tools, styling best practices, or robust deployment strategies that I would typically use in a production environment. These decisions were made consciously to balance showcasing my skills with maintaining a manageable scope for the project. I haven't quite figured out to fix the typing/deployment issues with Next.js and Vercel yet when testing the API endpoints with Jest (I did not write a ton of unit tests on my side projects, but I'm a big proponent of TDD) if I spent more time I would figure that out or simply implement a CI/CD pipeline with a more traditional framework.
-
 In a real-world scenario, I would adopt a more comprehensive approach, incorporating these additional features and utilizing enterprise-grade tools to ensure scalability, security, and maintainability. The current implementation serves as a foundation that can be expanded upon to meet the demands of a full-scale, production-ready application.
 
 ## Notes for Consideration
 
-- The testing suite is not complete, I ran into issues with typing and deployment with Next.js and Vercel, where the build would fail due to dynamic imports that vercel couldn't handle and typescript errors that I wasn't able to resolve in the time I spent on this. The tests do run locally if I change NextRequest -> NextApiRequest, but obviously on a production app this would be a non-starter and I'd have to rewrite the tests to work with that.
+- The testing suite is not complete, I ran into issues with typing and deployment with Next.js and Vercel, where the build would fail due to dynamic imports that vercel couldn't handle and typescript errors that I wasn't able to resolve in the time I spent on this. (The tests do run locally if I change NextRequest -> NextApiRequest, but obviously on a production app this would be a non-starter and I'd have to rewrite the tests to work with that.)
 - I implemented the UI pretty quickly, but I didn't go all out on the styling, I just wanted to get something that worked.
 - I didn't implement any authentication, though I would have liked to add some patient identification to the data and add middleware with tokenized authentication (Clerk, auth0, etc) for added security.
 
