@@ -21,24 +21,23 @@ export const useScreener = (screenerId: string) => {
 
   // Fetch screener data on component mount
   useEffect(() => {
-    const fetchScreener = async () => {
-      try {
-        const response = await fetch(`/api/loadScreener/${screenerId}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch screener");
-        }
-        const data = await response.json();
-        setScreener(data);
-      } catch (err) {
-        setError("Error loading screener. Please try again.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchScreener();
   }, [screenerId]);
 
+  const fetchScreener = useCallback(async () => {
+    try {
+      const response = await fetch(`/api/loadScreener/${screenerId}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch screener");
+      }
+      const data = await response.json();
+      setScreener(data);
+    } catch (err) {
+      setError("Error loading screener. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [screenerId]);
   // Handle user's answer to a question
   const handleAnswer = useCallback(
     (value: number) => {

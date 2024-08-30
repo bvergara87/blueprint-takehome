@@ -55,9 +55,7 @@ function calculateDomainScores(
   answers: Answer[],
   domainMapping: DomainMapping[]
 ): DomainScore {
-  const domainScores: DomainScore = {};
-
-  answers.forEach((answer) => {
+  return answers.reduce((domainScores: DomainScore, answer) => {
     const mapping = domainMapping.find(
       (m) => m.question_id === answer.question_id
     );
@@ -65,9 +63,8 @@ function calculateDomainScores(
       domainScores[mapping.domain] =
         (domainScores[mapping.domain] || 0) + answer.value;
     }
-  });
-
-  return domainScores;
+    return domainScores;
+  }, {});
 }
 
 function determineAssessments(domainScores: DomainScore): string[] {

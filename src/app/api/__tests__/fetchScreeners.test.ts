@@ -3,10 +3,10 @@
  */
 import { createMocks } from "node-mocks-http";
 import { GET } from "../fetchScreeners/route";
-import prisma from "../../../../lib/prisma";
+import prisma from "@/lib/prisma";
 import { NextRequest } from "next/server";
 
-jest.mock("../../../../lib/prisma", () => ({
+jest.mock("@/lib/prisma", () => ({
   diagnosticScreener: {
     findMany: jest.fn(),
   },

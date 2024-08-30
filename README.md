@@ -26,7 +26,7 @@ My solution is a Next.js-based web application hosted on Vercel. The application
 
 ## Technologies Used
 
-- Next.js 13 with App Router
+- Next.js 14 with App Router
 - Vercel for hosting
 - Postgres
 - React
