@@ -57,7 +57,19 @@ const AnswerSummary = ({
   }, [screener]);
 
   return (
-    <Box mt={8}>
+    <Box>
+      <HStack mb={4} justify="space-between" align="center">
+        <Button variant="outline" onClick={handleBack}>
+          Back
+        </Button>
+        <Button
+          isLoading={submitLoading}
+          colorScheme="green"
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </HStack>
       <Heading size="md" mb={4}>
         Answer Summary
       </Heading>
@@ -97,16 +109,6 @@ const AnswerSummary = ({
           </Box>
         ))}
       </VStack>
-      <HStack mt={8} justify="space-between" align="center">
-        <Button onClick={handleBack}>Back</Button>
-        <Button
-          isLoading={submitLoading}
-          colorScheme="green"
-          onClick={handleSubmit}
-        >
-          Submit
-        </Button>
-      </HStack>
     </Box>
   );
 };
